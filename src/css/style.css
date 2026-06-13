@@ -483,6 +483,7 @@ body {
   }
 }
 
+:root {
   --color-primary: #0f172a;
   --color-accent: #f97316;
   --color-success: #22c55e;
