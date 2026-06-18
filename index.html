@@ -22,6 +22,7 @@
         <span>FitFuel</span>
       </a>
       <span class="app-bar__subtitle">Search Exercises</span>
+      <button id="theme-toggle" class="btn-theme-toggle" type="button" aria-label="Switch to dark mode">&#x1F319;</button>
     </header>
 
     <!-- ── Main ──────────────────────────────────────────────── -->
@@ -42,6 +43,7 @@
             autocomplete="off"
           />
         </div>
+        <div id="recent-searches" class="recent-searches hidden" role="listbox" aria-label="Recent searches"></div>
       </div>
 
       <!-- Muscle group chips -->
@@ -49,12 +51,7 @@
         <h2 class="filters-section__label">Filter by Muscle Group</h2>
         <div class="chip-group" id="chip-group" role="group" aria-label="Muscle group filters">
           <button class="chip chip--active" data-value="" type="button">All</button>
-          <button class="chip" data-value="chest" type="button">Chest</button>
-          <button class="chip" data-value="back" type="button">Back</button>
-          <button class="chip" data-value="upper legs" type="button">Legs</button>
-          <button class="chip" data-value="shoulders" type="button">Shoulders</button>
-          <button class="chip" data-value="upper arms" type="button">Arms</button>
-          <button class="chip" data-value="waist" type="button">Core</button>
+          <button class="chip chip--favorites" data-value="__favorites__" type="button">&#x2764;&#xFE0F; Favorites</button>
         </div>
       </section>
 
