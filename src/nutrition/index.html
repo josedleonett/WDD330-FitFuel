@@ -4,37 +4,34 @@
     <meta charset="UTF-8" />
     <link rel="icon" type="image/png" href="/favicon.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="FitFuel – Personal Fitness & Nutrition Planner" />
+    <meta name="description" content="FitFuel – Nutrition & Meal Planner" />
     <meta name="author" content="Jose D. Leonett" />
-    <title>FitFuel – Search Exercises</title>
+    <title>FitFuel – Nutrition</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
       href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800&family=Inter:wght@400;500;600&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="/src/css/style.css" />
+    <link rel="stylesheet" href="/css/style.css" />
   </head>
   <body>
-    <!-- ── Top App Bar ─────────────────────────────────────── -->
     <header class="app-bar">
       <a href="/" class="app-bar__logo" aria-label="FitFuel home">
         <img src="/favicon.png" alt="FitFuel logo" class="app-bar__logo-image" />
         <span>FitFuel</span>
       </a>
-      <span class="app-bar__subtitle">Search Exercises</span>
+      <span class="app-bar__subtitle">Nutrition</span>
       <nav class="app-bar__nav" aria-label="Main navigation">
-        <a href="/" class="app-bar__nav-link app-bar__nav-link--active" aria-current="page">Exercises</a>
-        <a href="/nutrition/" class="app-bar__nav-link">Nutrition</a>
+        <a href="/" class="app-bar__nav-link">Exercises</a>
+        <a href="/nutrition/" class="app-bar__nav-link app-bar__nav-link--active" aria-current="page">Nutrition</a>
       </nav>
       <button id="theme-toggle" class="btn-theme-toggle" type="button" aria-label="Switch to dark mode">&#x1F319;</button>
     </header>
 
-    <!-- ── Main ──────────────────────────────────────────────── -->
     <main class="page-exercises" id="app">
-      <!-- Search bar -->
       <div class="search-bar-wrap">
-        <label for="search-input" class="sr-only">Search by exercise name</label>
+        <label for="search-input" class="sr-only">Search by meal name</label>
         <div class="search-bar">
           <svg class="search-bar__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
             <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
@@ -43,49 +40,44 @@
             type="search"
             id="search-input"
             class="search-bar__input"
-            placeholder="Search by exercise name…"
-            aria-label="Search exercises"
+            placeholder="Search by meal name…"
+            aria-label="Search meals"
             autocomplete="off"
           />
         </div>
         <div id="recent-searches" class="recent-searches hidden" role="listbox" aria-label="Recent searches"></div>
       </div>
 
-      <!-- Muscle group chips -->
-      <section class="filters-section" aria-label="Filter by muscle group">
-        <h2 class="filters-section__label">Filter by Muscle Group</h2>
-        <div class="chip-group" id="chip-group" role="group" aria-label="Muscle group filters">
+      <section class="filters-section" aria-label="Filter by category">
+        <h2 class="filters-section__label">Filter by Category</h2>
+        <div class="chip-group" id="chip-group" role="group" aria-label="Meal category filters">
           <button class="chip chip--active" data-value="" type="button">All</button>
           <button class="chip chip--favorites" data-value="__favorites__" type="button">&#x2764;&#xFE0F; Favorites</button>
         </div>
       </section>
 
-      <!-- Status / count -->
-      <div id="loading" class="loading hidden" aria-live="polite">Loading exercises…</div>
+      <div id="loading" class="loading hidden" aria-live="polite">Loading meals…</div>
       <div id="error-msg" class="error-msg hidden" role="alert"></div>
       <p id="results-count" class="results-count hidden" aria-live="polite"></p>
 
-      <!-- Results list -->
-      <ul id="exercise-list" class="exercise-list" role="list" aria-label="Exercise results"></ul>
+      <ul id="exercise-list" class="exercise-list" role="list" aria-label="Meal results"></ul>
     </main>
 
-    <!-- ── Exercise Detail Modal ─────────────────────────────── -->
     <dialog id="exercise-modal" class="exercise-modal" aria-labelledby="modal-title">
       <button class="modal-close" id="modal-close" aria-label="Close">&#x2715;</button>
       <div id="modal-content"></div>
     </dialog>
 
-    <!-- ── Bottom Nav (mobile) ───────────────────────────────── -->
     <nav class="bottom-nav" aria-label="App navigation">
       <a href="#" class="bottom-nav__item" aria-label="Dashboard">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
         <span>Dashboard</span>
       </a>
-      <a href="/" class="bottom-nav__item bottom-nav__item--active" aria-label="Exercises" aria-current="page">
+      <a href="/" class="bottom-nav__item" aria-label="Exercises">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M6 5v14M18 5v14M2 9h4M18 9h4M2 15h4M18 15h4"/></svg>
         <span>Exercises</span>
       </a>
-      <a href="/nutrition/" class="bottom-nav__item" aria-label="Nutrition">
+      <a href="/nutrition/" class="bottom-nav__item bottom-nav__item--active" aria-label="Nutrition" aria-current="page">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 2a10 10 0 0 1 10 10c0 5-4 9-9 10a10 10 0 0 1-10-9C3 7.5 7 2 12 2Z"/></svg>
         <span>Nutrition</span>
       </a>
@@ -95,6 +87,6 @@
       </a>
     </nav>
 
-    <script type="module" src="/src/main.js"></script>
+    <script type="module" src="/nutrition/main.js"></script>
   </body>
 </html>
