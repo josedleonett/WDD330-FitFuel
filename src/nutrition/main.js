@@ -15,6 +15,7 @@ import {
   setTheme,
   getItem,
   setItem,
+  addMealEntry,
 } from '../js/storageUtils.mjs';
 import {
   renderMealCard,
@@ -160,6 +161,12 @@ modal.addEventListener('click', (e) => {
       toggleFavorite(normalizeMealForStorage(meal));
       updateMealFavoriteBtn(meal.idMeal);
     }
+  }
+  const logBtn = e.target.closest('[data-meal-id]');
+  if (logBtn && logBtn.classList.contains('btn-log-workout')) {
+    addMealEntry({ name: logBtn.dataset.mealName, calories: 0, protein: 0, carbs: 0, fat: 0 });
+    logBtn.textContent = '\u2705 Logged!';
+    logBtn.disabled = true;
   }
 });
 

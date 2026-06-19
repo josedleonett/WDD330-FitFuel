@@ -101,6 +101,13 @@ export function renderMealModal(meal) {
         <p>${meal.strInstructions ?? 'No instructions available.'}</p>
         ${youtube}
       </div>
+      <div class="modal-section modal-actions">
+        <button class="btn-log-workout" type="button"
+          data-meal-id="${meal.idMeal}"
+          data-meal-name="${meal.strMeal}">
+          🍽️ Log this Meal
+        </button>
+      </div>
     </div>
   `;
 }
