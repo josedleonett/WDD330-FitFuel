@@ -1,4 +1,12 @@
-﻿import './css/style.css';
+﻿/**
+ * main.js
+ * Entry point for the Exercises page.
+ * Wires up all events: body-part filter chips, live search with debounce,
+ * infinite-scroll card list, exercise detail modal, favourites, dark mode,
+ * and recent-searches dropdown.
+ */
+
+import './css/style.css';
 import {
   getAllExercises,
   getBodyPartList,

@@ -1,6 +1,17 @@
-﻿import { isFavorite } from './storageUtils.mjs';
+﻿/**
+ * ui.mjs
+ * DOM-rendering helpers for the Exercises page.
+ * Builds exercise cards, the detail modal, and favourite-button state.
+ */
+
+import { isFavorite } from './storageUtils.mjs';
 
 const API_KEY = import.meta.env.VITE_RAPIDAPI_KEY ?? '';
+
+/**
+ * Returns the GIF URL for an exercise from ExerciseDB.
+ * @param {string} id - ExerciseDB exercise ID.
+ */
 const gifUrl = (id) =>
   `https://exercisedb.p.rapidapi.com/image?exerciseId=${id}&resolution=180&rapidapi-key=${API_KEY}`;
 

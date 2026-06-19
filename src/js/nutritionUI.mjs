@@ -1,6 +1,18 @@
+/**
+ * nutritionUI.mjs
+ * DOM-rendering helpers for the Nutrition page.
+ * Builds meal cards, the detail modal, and favourite-button state.
+ * Meal IDs are prefixed with "meal_" to share the favourites store
+ * with exercises without key collisions.
+ */
+
 import { isFavorite } from './storageUtils.mjs';
 
-// Prefix all meal IDs to avoid collision with exercise favorites
+/**
+ * Namespaces a TheMealDB ID for the shared favourites store.
+ * @param {string|number} idMeal
+ * @returns {string} e.g. "meal_52772"
+ */
 export const mealFavId = (idMeal) => `meal_${idMeal}`;
 
 function heartSVG(filled) {

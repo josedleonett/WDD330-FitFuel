@@ -1,3 +1,11 @@
+/**
+ * nutrition/main.js
+ * Entry point for the Nutrition page.
+ * Mirrors the Exercises page logic but fetches data from TheMealDB.
+ * Events covered: category chip selection, live meal search with debounce,
+ * meal detail modal, meal favourites, dark mode, and recent-searches dropdown.
+ */
+
 import '../css/style.css';
 import { getCategories, getMealsByCategory, getMealById, searchMealsByName } from '../js/mealAPI.mjs';
 import {
