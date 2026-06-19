@@ -274,12 +274,20 @@ body {
   border-radius: var(--radius-md);
   padding: 0.875rem;
   display: grid;
-  grid-template-columns: 180px 1fr;
-  gap: 0.875rem;
+  grid-template-columns: 110px 1fr;
+  gap: 0.75rem;
   align-items: start;
   box-shadow: var(--shadow-card);
   transition: box-shadow var(--transition), transform var(--transition);
   animation: fadeInUp 0.25s ease both;
+}
+
+@media (min-width: 480px) {
+  .exercise-card { grid-template-columns: 150px 1fr; }
+}
+
+@media (min-width: 640px) {
+  .exercise-card { grid-template-columns: 180px 1fr; gap: 0.875rem; }
 }
 
 .exercise-card:hover {
@@ -293,8 +301,8 @@ body {
 }
 
 .card-gif-wrap {
-  width: 180px;
-  height: 180px;
+  width: 100%;
+  aspect-ratio: 1;
   border-radius: var(--radius-sm);
   overflow: hidden;
   background: #f0f0f0;
@@ -328,10 +336,11 @@ body {
 
 .card-muscle-row {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   gap: 0.4rem;
   font-size: 0.82rem;
   color: var(--color-text-muted);
+  overflow: hidden;
 }
 
 .card-muscle-row strong {
