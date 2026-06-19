@@ -148,3 +148,92 @@ export function addRecentSearch(term) {
   list.unshift(term);
   setItem('fitfuel_recent_searches', list.slice(0, 5));
 }
+
+// ── Profile ──────────────────────────────────────────────────
+
+/**
+ * Returns the user profile object with calorie/macro goals.
+ * @returns {{ calorieGoal: number, proteinGoal: number, carbsGoal: number, fatGoal: number }}
+ */
+export function getProfile() {
+  return getItem('fitfuel_profile') ?? {
+    calorieGoal: 2000,
+    proteinGoal: 125,
+    carbsGoal:   200,
+    fatGoal:     60,
+  };
+}
+
+/**
+ * Persists the user profile object.
+ * @param {object} profile
+ */
+export function setProfile(profile) {
+  setItem('fitfuel_profile', profile);
+}
+
+// ── Meal Log ─────────────────────────────────────────────────
+
+/**
+ * Returns the full meal log array (all days).
+ * @returns {Array<{ name: string, calories: number, protein: number, carbs: number, fat: number, ts: number }>}
+ */
+export function getMealLog() {
+  return getItem('fitfuel_meal_log') ?? [];
+}
+
+/**
+ * Appends a meal entry to the log with a current timestamp.
+ * @param {{ name: string, calories: number, protein: number, carbs: number, fat: number }} entry
+ */
+export function addMealEntry(entry) {
+  const log = getMealLog();
+  log.push({ ...entry, ts: Date.now() });
+  setItem('fitfuel_meal_log', log);
+}
+
+// ── Workout Log ──────────────────────────────────────────────
+
+/**
+ * Returns the full workout log array (all days).
+ * @returns {Array<{ name: string, ts: number }>}
+ */
+export function getWorkoutLog() {
+  return getItem('fitfuel_workout_log') ?? [];
+}
+
+/**
+ * Appends a completed workout entry with a current timestamp.
+ * @param {{ name: string }} entry
+ */
+export function addWorkoutEntry(entry) {
+  const log = getWorkoutLog();
+  log.push({ ...entry, ts: Date.now() });
+  setItem('fitfuel_workout_log', log);
+  updateStreak();
+}
+
+// ── Streak ───────────────────────────────────────────────────
+
+/**
+ * Returns the current consecutive-day activity streak.
+ * @returns {number}
+ */
+export function getStreak() {
+  return getItem('fitfuel_streak') ?? 0;
+}
+
+/**
+ * Increments the streak if today has not been counted yet; resets if a day was missed.
+ * Called automatically by addWorkoutEntry and addMealEntry.
+ */
+export function updateStreak() {
+  const lastActive = getItem('fitfuel_streak_last_date');
+  const today = new Date().toDateString();
+  if (lastActive === today) return;
+
+  const yesterday = new Date(Date.now() - 86400000).toDateString();
+  const streak = lastActive === yesterday ? (getStreak() + 1) : 1;
+  setItem('fitfuel_streak', streak);
+  setItem('fitfuel_streak_last_date', today);
+}

@@ -1155,3 +1155,302 @@ main {
 .site-footer p + p {
   margin-top: 0.3rem;
 }
+
+/* ═══════════════════════════════════════════════════════════════
+   DASHBOARD PAGE
+   ═══════════════════════════════════════════════════════════════ */
+
+.page-dashboard {
+  flex: 1;
+  padding: 1rem;
+  max-width: 860px;
+  width: 100%;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+/* ── Section wrapper ──────────────────────────────────────────── */
+.dashboard-section {
+  background: var(--color-surface);
+  border-radius: var(--radius-md);
+  padding: 1rem 1.125rem;
+  box-shadow: var(--shadow-card);
+}
+
+.section-title {
+  font-family: var(--font-heading);
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--color-text-muted);
+  margin-bottom: 0.875rem;
+}
+
+/* ── Macro grid ───────────────────────────────────────────────── */
+.macro-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.875rem;
+}
+
+@media (min-width: 600px) {
+  .macro-grid { grid-template-columns: repeat(4, 1fr); }
+}
+
+/* ── Macro card ───────────────────────────────────────────────── */
+.macro-card {
+  background: var(--color-bg);
+  border-radius: var(--radius-sm);
+  padding: 0.875rem 0.75rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  animation: fadeInUp 0.3s ease both;
+}
+
+.macro-card__value {
+  font-family: var(--font-heading);
+  font-size: 1.75rem;
+  font-weight: 800;
+  color: var(--color-primary);
+  line-height: 1;
+}
+
+[data-theme='dark'] .macro-card__value { color: var(--color-text); }
+
+.macro-card__label {
+  font-size: 0.78rem;
+  color: var(--color-text-muted);
+}
+
+.macro-card__bar-wrap {
+  height: 8px;
+  background: var(--color-border);
+  border-radius: 99px;
+  overflow: hidden;
+  margin-top: 0.35rem;
+}
+
+.macro-card__bar {
+  height: 100%;
+  border-radius: 99px;
+  width: 0%;
+  transition: width 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.macro-card__bar--calories { background: var(--color-accent); }
+.macro-card__bar--protein  { background: #3b82f6; }
+.macro-card__bar--carbs    { background: var(--color-success); }
+.macro-card__bar--fat      { background: #a855f7; }
+
+.macro-card__pct {
+  font-size: 0.72rem;
+  color: var(--color-text-muted);
+}
+
+/* ── Streak badge ─────────────────────────────────────────────── */
+.streak-badge {
+  font-size: 0.78rem;
+  font-weight: 700;
+  background: #fff7ed;
+  color: #c2410c;
+  border: 1px solid #fdba74;
+  border-radius: 99px;
+  padding: 0.25rem 0.625rem;
+  white-space: nowrap;
+  margin-left: auto;
+}
+
+[data-theme='dark'] .streak-badge {
+  background: #431407;
+  color: #fb923c;
+  border-color: #9a3412;
+}
+
+/* ── Quick actions ────────────────────────────────────────────── */
+.quick-actions {
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.quick-action-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.6rem 1.1rem;
+  border-radius: var(--radius-sm);
+  background: var(--color-primary);
+  color: white;
+  font-size: 0.88rem;
+  font-weight: 600;
+  border: none;
+  cursor: pointer;
+  transition: opacity var(--transition), transform var(--transition);
+  text-decoration: none;
+}
+
+.quick-action-btn:hover { opacity: 0.88; transform: translateY(-1px); }
+
+.quick-action-btn svg {
+  width: 1rem;
+  height: 1rem;
+  flex-shrink: 0;
+}
+
+/* ── Two-column layout (desktop) ──────────────────────────────── */
+.dashboard-columns {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+@media (min-width: 640px) {
+  .dashboard-columns {
+    flex-direction: row;
+    align-items: flex-start;
+  }
+
+  .dashboard-columns > * { flex: 1; }
+}
+
+/* ── Activity list ────────────────────────────────────────────── */
+.activity-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.activity-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.625rem 0;
+  border-bottom: 1px solid var(--color-border);
+  font-size: 0.88rem;
+}
+
+.activity-item:last-child { border-bottom: none; }
+
+.activity-item__info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.1rem;
+  min-width: 0;
+}
+
+.activity-item__info strong {
+  font-weight: 600;
+  color: var(--color-text);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.activity-item__time {
+  font-size: 0.75rem;
+  color: var(--color-text-muted);
+}
+
+.activity-item__value {
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--color-text-muted);
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.activity-item__badge {
+  font-size: 0.72rem;
+  font-weight: 600;
+  padding: 0.2rem 0.55rem;
+  border-radius: 99px;
+  flex-shrink: 0;
+}
+
+.activity-item__badge--done {
+  background: #dcfce7;
+  color: #15803d;
+}
+
+[data-theme='dark'] .activity-item__badge--done {
+  background: #14532d;
+  color: #86efac;
+}
+
+.activity-empty {
+  font-size: 0.85rem;
+  color: var(--color-text-muted);
+  padding: 0.5rem 0;
+}
+
+/* ── Log Meal form ────────────────────────────────────────────── */
+.log-meal-form-wrap {
+  padding: 1.5rem;
+}
+
+.modal-section-title {
+  font-family: var(--font-heading);
+  font-size: 1.15rem;
+  font-weight: 800;
+  color: var(--color-primary);
+  margin-bottom: 1.125rem;
+}
+
+.form-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  margin-bottom: 0.875rem;
+}
+
+.form-field label {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--color-text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.form-field input {
+  padding: 0.625rem 0.875rem;
+  border: 1.5px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  background: var(--color-bg);
+  color: var(--color-text);
+  font-size: 0.9rem;
+  transition: border-color var(--transition);
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+.form-field input:focus {
+  outline: none;
+  border-color: var(--color-primary);
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.75rem;
+}
+
+.btn-submit {
+  width: 100%;
+  padding: 0.75rem;
+  background: var(--color-accent);
+  color: white;
+  border: none;
+  border-radius: var(--radius-sm);
+  font-size: 0.95rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: opacity var(--transition);
+  margin-top: 0.25rem;
+}
+
+.btn-submit:hover { opacity: 0.88; }

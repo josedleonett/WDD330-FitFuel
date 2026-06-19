@@ -1,0 +1,176 @@
+<!doctype html>
+<html lang="en-US">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/png" href="/favicon.png" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="FitFuel – Your daily fitness & nutrition dashboard" />
+    <meta name="author" content="Jose D. Leonett" />
+    <title>FitFuel – Dashboard</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800&family=Inter:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/css/style.css" />
+  </head>
+  <body>
+    <!-- ── Top App Bar ─────────────────────────────────────── -->
+    <header class="app-bar">
+      <a href="/dashboard/" class="app-bar__logo" aria-label="FitFuel home">
+        <img src="/favicon.png" alt="FitFuel logo" class="app-bar__logo-image" />
+        <span>FitFuel</span>
+      </a>
+      <span class="app-bar__subtitle" id="dashboard-date"></span>
+      <nav class="app-bar__nav" aria-label="Main navigation">
+        <a href="/dashboard/" class="app-bar__nav-link app-bar__nav-link--active" aria-current="page">Dashboard</a>
+        <a href="/" class="app-bar__nav-link">Exercises</a>
+        <a href="/nutrition/" class="app-bar__nav-link">Nutrition</a>
+      </nav>
+      <span class="streak-badge" id="streak-badge" aria-label="Activity streak" title="Consecutive active days">🔥 <span id="streak-count">0</span> days</span>
+      <button id="theme-toggle" class="btn-theme-toggle" type="button" aria-label="Switch to dark mode">🌙</button>
+    </header>
+
+    <!-- ── Main ──────────────────────────────────────────────── -->
+    <main class="page-dashboard" id="app">
+
+      <!-- Daily Nutrition Progress -->
+      <section class="dashboard-section" aria-label="Daily nutrition progress">
+        <h1 class="section-title">Daily Nutrition Progress</h1>
+
+        <div class="macro-grid">
+          <!-- Calories -->
+          <div class="macro-card macro-card--calories">
+            <div class="macro-card__value"><span id="cal-consumed">0</span></div>
+            <div class="macro-card__label">of <span id="cal-goal">2,000</span> kcal</div>
+            <div class="macro-card__bar-wrap" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" id="cal-bar-wrap">
+              <div class="macro-card__bar macro-card__bar--calories" id="cal-bar"></div>
+            </div>
+            <div class="macro-card__pct" id="cal-pct">0% completed</div>
+          </div>
+
+          <!-- Protein -->
+          <div class="macro-card">
+            <div class="macro-card__value"><span id="protein-consumed">0</span>g</div>
+            <div class="macro-card__label">of <span id="protein-goal">125</span>g protein</div>
+            <div class="macro-card__bar-wrap" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" id="protein-bar-wrap">
+              <div class="macro-card__bar macro-card__bar--protein" id="protein-bar"></div>
+            </div>
+            <div class="macro-card__pct" id="protein-pct">0% completed</div>
+          </div>
+
+          <!-- Carbs -->
+          <div class="macro-card">
+            <div class="macro-card__value"><span id="carbs-consumed">0</span>g</div>
+            <div class="macro-card__label">of <span id="carbs-goal">200</span>g carbs</div>
+            <div class="macro-card__bar-wrap" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" id="carbs-bar-wrap">
+              <div class="macro-card__bar macro-card__bar--carbs" id="carbs-bar"></div>
+            </div>
+            <div class="macro-card__pct" id="carbs-pct">0% completed</div>
+          </div>
+
+          <!-- Fat -->
+          <div class="macro-card">
+            <div class="macro-card__value"><span id="fat-consumed">0</span>g</div>
+            <div class="macro-card__label">of <span id="fat-goal">60</span>g fat</div>
+            <div class="macro-card__bar-wrap" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" id="fat-bar-wrap">
+              <div class="macro-card__bar macro-card__bar--fat" id="fat-bar"></div>
+            </div>
+            <div class="macro-card__pct" id="fat-pct">0% completed</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Quick Actions -->
+      <section class="dashboard-section" aria-label="Quick actions">
+        <h2 class="section-title">Quick Actions</h2>
+        <div class="quick-actions">
+          <button class="quick-action-btn" id="btn-log-meal" type="button">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 2a10 10 0 0 1 10 10c0 5-4 9-9 10a10 10 0 0 1-10-9C3 7.5 7 2 12 2Z"/></svg>
+            Log Meal
+          </button>
+          <a class="quick-action-btn" href="/" aria-label="Go to exercises to log a workout">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M6 5v14M18 5v14M2 9h4M18 9h4M2 15h4M18 15h4"/></svg>
+            New Workout
+          </a>
+        </div>
+      </section>
+
+      <!-- Recent Activity -->
+      <div class="dashboard-columns">
+        <!-- Today's Meals -->
+        <section class="dashboard-section" aria-label="Today's meals">
+          <h2 class="section-title">Today's Meals</h2>
+          <ul class="activity-list" id="meals-list" role="list" aria-label="Today's meals"></ul>
+          <p class="activity-empty" id="meals-empty">No meals logged today.</p>
+        </section>
+
+        <!-- Recent Workouts -->
+        <section class="dashboard-section" aria-label="Recent workouts">
+          <h2 class="section-title">Recent Workouts</h2>
+          <ul class="activity-list" id="workouts-list" role="list" aria-label="Recent workouts"></ul>
+          <p class="activity-empty" id="workouts-empty">No workouts logged today.</p>
+        </section>
+      </div>
+
+    </main>
+
+    <!-- ── Log Meal Modal ────────────────────────────────────── -->
+    <dialog id="log-meal-modal" class="exercise-modal" aria-labelledby="log-meal-title">
+      <button class="modal-close" id="log-meal-close" aria-label="Close">&#x2715;</button>
+      <div class="log-meal-form-wrap">
+        <h2 id="log-meal-title" class="modal-section-title">Log a Meal</h2>
+        <form id="log-meal-form" novalidate>
+          <div class="form-field">
+            <label for="meal-name">Meal name</label>
+            <input type="text" id="meal-name" placeholder="e.g. Chicken & rice" required autocomplete="off" />
+          </div>
+          <div class="form-row">
+            <div class="form-field">
+              <label for="meal-calories">Calories (kcal)</label>
+              <input type="number" id="meal-calories" min="0" placeholder="450" required />
+            </div>
+            <div class="form-field">
+              <label for="meal-protein">Protein (g)</label>
+              <input type="number" id="meal-protein" min="0" placeholder="30" />
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-field">
+              <label for="meal-carbs">Carbs (g)</label>
+              <input type="number" id="meal-carbs" min="0" placeholder="50" />
+            </div>
+            <div class="form-field">
+              <label for="meal-fat">Fat (g)</label>
+              <input type="number" id="meal-fat" min="0" placeholder="15" />
+            </div>
+          </div>
+          <button type="submit" class="btn-submit">Add Meal</button>
+        </form>
+      </div>
+    </dialog>
+
+    <!-- ── Bottom Nav (mobile) ───────────────────────────────── -->
+    <nav class="bottom-nav" aria-label="App navigation">
+      <a href="/dashboard/" class="bottom-nav__item bottom-nav__item--active" aria-label="Dashboard" aria-current="page">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+        <span>Dashboard</span>
+      </a>
+      <a href="/" class="bottom-nav__item" aria-label="Exercises">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M6 5v14M18 5v14M2 9h4M18 9h4M2 15h4M18 15h4"/></svg>
+        <span>Exercises</span>
+      </a>
+      <a href="/nutrition/" class="bottom-nav__item" aria-label="Nutrition">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 2a10 10 0 0 1 10 10c0 5-4 9-9 10a10 10 0 0 1-10-9C3 7.5 7 2 12 2Z"/></svg>
+        <span>Nutrition</span>
+      </a>
+      <a href="#" class="bottom-nav__item" aria-label="More">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+        <span>More</span>
+      </a>
+    </nav>
+
+    <script type="module" src="/dashboard/main.js"></script>
+  </body>
+</html>
