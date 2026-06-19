@@ -22,6 +22,7 @@ import {
   setLastFilter,
   getRecentSearches,
   addRecentSearch,
+  addWorkoutEntry,
 } from './js/storageUtils.mjs';
 import { hideError, renderCard, renderModal, showError, updateFavoriteBtn } from './js/ui.mjs';
 
@@ -113,6 +114,12 @@ modal.addEventListener('click', (e) => {
       toggleFavorite(exercise);
       updateFavoriteBtn(exercise.id);
     }
+  }
+  const doneBtn = e.target.closest('.btn-log-workout');
+  if (doneBtn) {
+    addWorkoutEntry({ name: doneBtn.dataset.name });
+    doneBtn.textContent = '✅ Logged!';
+    doneBtn.disabled = true;
   }
 });
 

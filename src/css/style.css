@@ -1454,3 +1454,31 @@ main {
 }
 
 .btn-submit:hover { opacity: 0.88; }
+
+/* ── Log Workout button (exercise modal) ──────────────────────── */
+.modal-actions {
+  display: flex;
+  gap: 0.5rem;
+  padding-top: 0.25rem;
+}
+
+.btn-log-workout {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.5rem 1rem;
+  border-radius: var(--radius-sm);
+  background: var(--color-success);
+  color: white;
+  font-size: 0.85rem;
+  font-weight: 700;
+  border: none;
+  cursor: pointer;
+  transition: opacity var(--transition);
+}
+
+.btn-log-workout:hover   { opacity: 0.88; }
+.btn-log-workout:disabled {
+  opacity: 0.6;
+  cursor: default;
+}

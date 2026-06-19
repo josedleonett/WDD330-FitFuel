@@ -108,6 +108,11 @@ export function renderModal(exercise) {
         <h3>Instructions</h3>
         ${instructions}
       </div>
+      <div class="modal-section modal-actions">
+        <button class="btn-log-workout" type="button" data-id="${exercise.id}" data-name="${exercise.name}">
+          ✅ Mark as Done
+        </button>
+      </div>
     </div>
   `;
 }
