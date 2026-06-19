@@ -11,6 +11,7 @@ import {
   getTheme,
   setTheme,
   getProfile,
+  setProfile,
   getMealLog,
   addMealEntry,
   getWorkoutLog,
@@ -29,6 +30,10 @@ const mealsList       = document.getElementById('meals-list');
 const mealsEmpty      = document.getElementById('meals-empty');
 const workoutsList    = document.getElementById('workouts-list');
 const workoutsEmpty   = document.getElementById('workouts-empty');
+const settingsBtn     = document.getElementById('settings-btn');
+const settingsModal   = document.getElementById('settings-modal');
+const settingsClose   = document.getElementById('settings-close');
+const settingsForm    = document.getElementById('settings-form');
 
 // ── Macro bar IDs ────────────────────────────────────────────
 const MACROS = [
@@ -202,4 +207,36 @@ logMealForm.addEventListener('submit', (e) => {
   logMealForm.reset();
   renderMacros();
   renderMeals();
+});
+
+// ── Settings modal ───────────────────────────────────────────
+function populateSettingsForm() {
+  const p = getProfile();
+  document.getElementById('goal-calories').value = p.calorieGoal ?? 2000;
+  document.getElementById('goal-protein').value  = p.proteinGoal  ?? 125;
+  document.getElementById('goal-carbs').value    = p.carbsGoal    ?? 200;
+  document.getElementById('goal-fat').value      = p.fatGoal      ?? 60;
+}
+
+settingsBtn.addEventListener('click', () => {
+  populateSettingsForm();
+  settingsModal.showModal();
+});
+
+settingsClose.addEventListener('click', () => settingsModal.close());
+
+settingsModal.addEventListener('click', (e) => {
+  if (e.target === settingsModal) settingsModal.close();
+});
+
+settingsForm.addEventListener('submit', (e) => {
+  e.preventDefault();
+  setProfile({
+    calorieGoal: Number(document.getElementById('goal-calories').value) || 2000,
+    proteinGoal: Number(document.getElementById('goal-protein').value)  || 125,
+    carbsGoal:   Number(document.getElementById('goal-carbs').value)    || 200,
+    fatGoal:     Number(document.getElementById('goal-fat').value)      || 60,
+  });
+  settingsModal.close();
+  renderMacros();
 });
