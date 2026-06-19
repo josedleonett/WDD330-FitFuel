@@ -81,6 +81,21 @@ body {
   color: var(--color-text);
 }
 
+/* Hide nav links and subtitle on mobile — bottom-nav handles navigation */
+@media (max-width: 639px) {
+  .app-bar__nav     { display: none; }
+  .app-bar__subtitle { display: none; }
+  .app-bar {
+    flex-wrap: nowrap;
+    overflow: hidden;
+    gap: 0.4rem;
+  }
+  .app-bar__logo { flex-shrink: 0; }
+  .streak-badge  { flex-shrink: 0; font-size: 0.72rem; padding: 0.2rem 0.5rem; }
+  .btn-settings  { flex-shrink: 0; }
+  .btn-theme-toggle { flex-shrink: 0; margin-left: 0; }
+}
+
 .app-bar__nav {
   display: flex;
   align-items: center;
@@ -890,7 +905,6 @@ main {
 }
 
 .btn-theme-toggle {
-  margin-left: auto;
   background: none;
   border: 1.5px solid var(--color-border);
   border-radius: var(--radius-sm);
@@ -900,6 +914,12 @@ main {
   line-height: 1;
   color: var(--color-text);
   transition: background var(--transition), border-color var(--transition), transform var(--transition);
+  margin-left: auto;
+}
+
+/* On mobile, the streak-badge already has margin-left: auto — reset theme toggle */
+@media (max-width: 639px) {
+  .btn-theme-toggle { margin-left: 0; }
 }
 
 .btn-theme-toggle:hover {
